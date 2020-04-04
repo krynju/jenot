@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 
-const String _name = "Your Name";
+const String _name = "Janusz Markiewicz";
 
 class ChatMessage extends StatelessWidget {
-  ChatMessage({this.text, this.animationController});
+  ChatMessage({this.senderName, this.text, this.animationController});
 
+  final String senderName;
   final String text;
   final AnimationController animationController;
 
@@ -14,29 +15,88 @@ class ChatMessage extends StatelessWidget {
       sizeFactor: new CurvedAnimation(
           parent: animationController, curve: Curves.easeOut),
       axisAlignment: 0.0,
-      child: new Container(
-        margin: const EdgeInsets.symmetric(vertical: 10.0),
-        child: new Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            new Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: new CircleAvatar(child: new Text(_name[0])),
-            ),
-            new Expanded(
+      child: senderName == _name ? _buildSent(context):_buildReceived(context)
+    );
+  }
+
+  Widget _buildReceived(BuildContext context){
+    return new Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          new Container(
+
+            margin: const EdgeInsets.only(right: 16.0),
+            child: new CircleAvatar(child: new Text(_name[0])),
+          ),
+          new Expanded(
+
+            child: new Container(
+              padding: const EdgeInsets.only(right:50.0),
               child: new Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                  new Text(_name, style: Theme.of(context).textTheme.subhead),
+                  new Text(senderName, style: Theme.of(context).textTheme.caption),
                   new Container(
+                    decoration: BoxDecoration(color:Colors.lightBlue[50],
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(15),
+                        bottomRight: Radius.circular(15),
+                        topLeft: Radius.circular(0),
+                        topRight: Radius.circular(15)),
+                    ),
+
+
                     margin: const EdgeInsets.only(top: 5.0),
+                    padding: const EdgeInsets.all(10.0),
                     child: new Text(text),
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildSent(BuildContext context){
+    return new Container(
+      margin: const EdgeInsets.symmetric(vertical: 10.0),
+      child: new Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+
+          new Expanded(
+
+            child: new Container(
+              padding: const EdgeInsets.only(left:80.0),
+
+              child: new Column(
+                textDirection: TextDirection.rtl,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  new Text(senderName, style: Theme.of(context).textTheme.caption),
+                  new Container(
+                    decoration: BoxDecoration(color:Colors.lightBlue[800],
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(15),
+                          bottomRight: Radius.circular(15),
+                          topLeft: Radius.circular(15),
+                          topRight: Radius.circular(0)),
+                    ),
+
+
+                    margin: const EdgeInsets.only(top: 5.0),
+                    padding: const EdgeInsets.all(10.0),
+                    child: new Text(text, style:TextStyle(color: Colors.white)),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -72,9 +132,9 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                       _isComposing = text.length > 0;
                     });
                   },
-                  onSubmitted: _handleSubmitted,
+                  onSubmitted: (text) => _handleSubmitted(_name, text),
                   decoration:
-                  new InputDecoration.collapsed(hintText: "Send a message"),
+                      new InputDecoration.collapsed(hintText: "Wyślij wiadomość"),
                 ),
               ),
               new Container(
@@ -82,7 +142,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
                 child: new IconButton(
                   icon: new Icon(Icons.send),
                   onPressed: _isComposing
-                      ? () => _handleSubmitted(_textController.text)
+                      ? () => _handleSubmitted(_name, _textController.text)
                       : null,
                 ),
               )
@@ -91,16 +151,17 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     );
   }
 
-  void _handleSubmitted(String text) {
+
+  void _handleSubmitted(String senderName, String text) {
     _textController.clear();
     setState(() {
       _isComposing = false;
     });
     ChatMessage message = new ChatMessage(
+      senderName: senderName,
       text: text,
       animationController: new AnimationController(
-          vsync: this,
-          duration: new Duration(milliseconds: 700)),
+          vsync: this, duration: new Duration(milliseconds: 700)),
     );
     setState(() {
       _messages.insert(0, message);
@@ -108,10 +169,19 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
     message.animationController.forward();
   }
 
+  final String loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text(recipientName)),
+      appBar: new AppBar(
+        title: new Text(recipientName),
+        actions: <Widget>[
+          new IconButton(
+              icon: Icon(Icons.hdr_on),
+              onPressed: () => _handleSubmitted(recipientName, loremIpsum ))
+        ],
+      ),
       body: new Column(
         children: <Widget>[
           new Flexible(
