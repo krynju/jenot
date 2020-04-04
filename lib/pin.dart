@@ -118,7 +118,7 @@ class PinWidgetState extends State<PinWidget> {
     );
   }
   void _pushSaved(){
-    Navigator.of(context).push(
+    Navigator.of(context).pushReplacement(
       MaterialPageRoute<void>(
         builder: (BuildContext context){
           return widget.proceed_to;
