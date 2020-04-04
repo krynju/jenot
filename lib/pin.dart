@@ -22,8 +22,8 @@ class PinWidgetState extends State<PinWidget> {
   }
   IconButton getButton(String label){
     return IconButton(
-        padding: const EdgeInsets.all(30),
-        icon: Text(label, style: TextStyle(fontSize: 20)),
+        padding: const EdgeInsets.all(15),
+        icon: Text(label, style: TextStyle(fontSize: 25)),
         onPressed: () {
           setState(() {
             _pin = _pin+label;
@@ -40,7 +40,7 @@ class PinWidgetState extends State<PinWidget> {
   }
   Row pinField(){
     return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      mainAxisAlignment: MainAxisAlignment.center,
       crossAxisAlignment: CrossAxisAlignment.center,
       children:[
         Icon(_pin.length>0? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>0? Colors.blue : Colors.black12),
@@ -53,7 +53,7 @@ class PinWidgetState extends State<PinWidget> {
   }
   Container my_keyboard(){
     return Container(
-      padding: const EdgeInsets.all(30),
+      padding: const EdgeInsets.fromLTRB(20, 0, 20, 40),
       child: Column(
           mainAxisAlignment: MainAxisAlignment.end,
           children:[
@@ -89,10 +89,22 @@ class PinWidgetState extends State<PinWidget> {
 //          actions: <Widget>[IconButton(icon: Icon(Icons.list, color: Colors.pink,), onPressed: _pushSaved)]
 //      ),
         body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            pinField(),
+            ListTile(
+
+              contentPadding: EdgeInsets.fromLTRB(100, 100, 100, 0),
+              //leading: IconButton(icon: Icon(Icons.info), onPressed: _showDialog),
+              leading: new Image(image: AssetImage('images/herb.png'),
+                fit: BoxFit.fitWidth,
+                width: 50,),
+              title: Text('Jenot', style: TextStyle(fontSize: 30, fontFamily: 'Georgia'), ),
+              subtitle: Text('catchy phrase'),
+            ),
+            Container(padding: EdgeInsets.all(40),child:pinField(),),
+            Divider(),
             my_keyboard(),
           ],
         )

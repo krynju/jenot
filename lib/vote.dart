@@ -10,7 +10,6 @@ class VoteWidget extends StatefulWidget {
 //  final Widget proceed_to;
 
 }
-
 class VoteWidgetState extends State<VoteWidget> {
   bool _agreed = false;
   bool _voted = false;
@@ -41,7 +40,7 @@ class VoteWidgetState extends State<VoteWidget> {
     return Container(
         child:
         Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
           children:[
             Text(title), IconButton(icon: Icon(Icons.info), onPressed: _showDialog)
@@ -56,13 +55,13 @@ class VoteWidgetState extends State<VoteWidget> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
         children:[
-          FlatButton(child: Text('agree'), color: Colors.greenAccent, onPressed: (){
+          MaterialButton(child: Text('agree'), color: Colors.greenAccent, onPressed: (){
         setState(() {
           _voted = true;
           _agreed = true;
         });
       }),
-          FlatButton(child: Text('disagree'),color: Colors.redAccent, onPressed: (){
+          MaterialButton(child: Text('disagree'),color: Colors.redAccent, onPressed: (){
           setState(() {
           _voted = true;
           _agreed = false;
@@ -79,16 +78,85 @@ class VoteWidgetState extends State<VoteWidget> {
 //          title: Text('Startup Name Generator'),
 //          actions: <Widget>[IconButton(icon: Icon(Icons.list, color: Colors.pink,), onPressed: _pushSaved)]
 //      ),
-        body: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            getVoteTilte('Epstein killed himself'),
-            getVoteButtons(),
+//        body: Column(
+//          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+//          crossAxisAlignment: CrossAxisAlignment.center,
+//          children: [
+//            getVoteTilte('Epstein killed himself'),
+//            getVoteButtons(),
+//          ],
+//        )
+      body: Column(
+          children:[
+            Card(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: <Widget>[
+            ListTile(
+              contentPadding: EdgeInsets.all(20),
+              //leading: IconButton(icon: Icon(Icons.info), onPressed: _showDialog),
+              leading: new Image(image: AssetImage('images/herb.png'),
+                fit: BoxFit.fitHeight,
+                width: 60,),
+              title: Text('Głosowanie korespondencyjne'),
+              subtitle: Text('Głosowanie odbędzię się w formie korespondencyjnej w zwyczajnym terminie'),
+            ),
+
           ],
-        )
+        ),
+      ),
+            Card(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  Container(child:Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: <Widget>[
+                      ButtonTheme(
+
+                        minWidth: 150.0,
+                        height: 60.0,
+                        child: OutlineButton(
+                          child: const Text('ZA'),
+                          onPressed: () {setState(() {_voted=true; _agreed=true;}); print(_voted); print(_agreed);},
+                          borderSide: BorderSide(color: (_voted && _agreed)? Colors.blue : Colors.black12),
+                        ),
+                      ),
+                      ButtonTheme(
+
+                        minWidth: 150.0,
+                        height: 60.0,
+                        child: OutlineButton(
+                          child: const Text('PRZECIW'),
+                          onPressed: () {setState(() {_voted=true; _agreed=false;});},
+                          borderSide: BorderSide(color: (_voted && (!_agreed))? Colors.blue : Colors.black12),
+                        ),
+                      ),
+
+                    ],
+                  ),
+                    padding: EdgeInsets.all(20),),
+
+                  Container(child:LinearProgressIndicator(value: 0.69,),padding: EdgeInsets.all(20),),
+
+                  Divider(),
+                  Container(child:Column(
+                    children: [MaterialButton(child: const Text('Wniosek formalny'), onPressed: (){},),
+                      MaterialButton(child: const Text('Sprzeciw'), onPressed: (){},),
+                      MaterialButton(child: const Text('Zgłoszenie do dyskusji'), onPressed: (){},),],
+                  ),padding: EdgeInsets.all(20),),
+
+                ],
+              ),
+            )
+    ]
+      )
     );
   }
+
+
+
+
 //  void _pushSaved(){
 //    Navigator.of(context).push(
 //      MaterialPageRoute<void>(
