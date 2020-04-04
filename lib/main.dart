@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'pin.dart';
 import 'chat.dart';
 import 'vote.dart';
+import 'contacts.dart';
 
 void main() => runApp(MyApp());
 
@@ -106,8 +107,9 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            IconButton(icon: Icon(Icons.chat), onPressed: openChat),
-            IconButton(icon: Icon(Icons.assessment), onPressed: openVote)
+            IconButton(icon: Icon(Icons.assessment), onPressed: openVote),
+//            IconButton(icon: Icon(Icons.chat), onPressed: openChat),
+            IconButton(icon: Icon(Icons.contacts), onPressed: openContacts),
           ],
         ),
       ),
@@ -123,6 +125,12 @@ class _MyHomePageState extends State<MyHomePage> {
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (BuildContext context) {
       return ChatScreen();
+    }));
+  }
+  void openContacts() {
+    Navigator.of(context)
+        .push(MaterialPageRoute(builder: (BuildContext context) {
+      return ContactScreen();
     }));
   }
 

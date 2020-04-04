@@ -45,7 +45,10 @@ class ChatMessage extends StatelessWidget {
 class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   final TextEditingController _textController = new TextEditingController();
   final List<ChatMessage> _messages = <ChatMessage>[];
+  final String recipientName;
   bool _isComposing = false;
+
+  ChatScreenState({this.recipientName});
 
   @override
   void dispose() {
@@ -108,7 +111,7 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
-      appBar: new AppBar(title: new Text("Friendlychat")),
+      appBar: new AppBar(title: new Text(recipientName)),
       body: new Column(
         children: <Widget>[
           new Flexible(
@@ -131,6 +134,10 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
 }
 
 class ChatScreen extends StatefulWidget {
+  final String recipientName;
+
+  ChatScreen({this.recipientName});
+
   @override
-  State createState() => new ChatScreenState();
+  State createState() => new ChatScreenState(recipientName: recipientName);
 }
