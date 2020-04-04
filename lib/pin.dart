@@ -90,20 +90,27 @@ class PinWidgetState extends State<PinWidget> {
 //      ),
         body: Column(
 
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.end,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            ListTile(
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:[
+                new Image(image: AssetImage('images/herb.png'),
+                  fit: BoxFit.fitHeight,
+                  width: 70,),
+                Container(padding: const EdgeInsets.fromLTRB(20, 20, 20, 20), child:
+                Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    Text('Jenot', style: TextStyle(fontSize: 35, fontFamily: 'Georgia'), ),
+                    Text('catchy phrase',),
+                  ],
+                ),)
 
-              contentPadding: EdgeInsets.fromLTRB(100, 100, 100, 0),
-              //leading: IconButton(icon: Icon(Icons.info), onPressed: _showDialog),
-              leading: new Image(image: AssetImage('images/herb.png'),
-                fit: BoxFit.fitWidth,
-                width: 50,),
-              title: Text('Jenot', style: TextStyle(fontSize: 30, fontFamily: 'Georgia'), ),
-              subtitle: Text('catchy phrase'),
+              ]
             ),
-            Container(padding: EdgeInsets.all(40),child:pinField(),),
+            Container(padding: const EdgeInsets.fromLTRB(40, 130, 40, 30),child:pinField(),),
             Divider(),
             my_keyboard(),
           ],
