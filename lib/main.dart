@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'pin.dart';
 
 void main() => runApp(MyApp());
 const String _name = "Your Name";
@@ -23,7 +24,10 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.light,
         accentColor: Colors.lightBlue[50]
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: PinWidget(
+        correct_pin: '6969',
+        proceed_to: MyHomePage(title: 'Flutter Demo Home Page'),
+      )
     );
   }
 }
