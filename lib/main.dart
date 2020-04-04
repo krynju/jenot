@@ -6,12 +6,13 @@ import 'contacts.dart';
 
 void main() => runApp(MyApp());
 
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Jenot Demo',
+        title: 'Jenot',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
         // Notice that the counter didn't reset back to zero; the application
         // is not restarted.
         primaryColor: Colors.white,
-        brightness: Brightness.light,
+
+          brightness: Brightness.light,
         accentColor: Colors.lightBlue[50]
       ),
       home: PinWidget(
@@ -100,24 +102,14 @@ class _MyHomePageState extends State<MyHomePage> {
           // horizontal).
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
+
             IconButton(icon: Icon(Icons.assessment), onPressed: openVote),
 //            IconButton(icon: Icon(Icons.chat), onPressed: openChat),
             IconButton(icon: Icon(Icons.contacts), onPressed: openContacts),
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 
