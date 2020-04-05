@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'strings.dart';
 
@@ -169,10 +171,20 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       _messages.insert(0, message);
     });
     message.animationController.forward();
+    if (senderName == mainUserName) {
+      Timer(Duration(seconds: 3), () {
+        _handleSubmitted(recipientName, "Cześć!");
+      });
+
+      Timer(Duration(seconds: 4), () {
+        _handleSubmitted(recipientName, "Widziałeś już nowy projekt ustawy?");
+      });
+    }
   }
 
+
   final String loremIpsum =
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.";
 
   @override
   Widget build(BuildContext context) {
@@ -182,13 +194,13 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       appBar: new AppBar(
         title: new Text(recipientName),
         actions: <Widget>[
-          new Image(image: AssetImage(partiesAssets[partyIndex]),
-              fit: BoxFit.fitWidth,
-              width: 40),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: new Image(image: AssetImage(partiesAssets[partyIndex]),
+                fit: BoxFit.fitWidth,
+                width: 40),
+          ),
 
-          new IconButton(
-              icon: Icon(Icons.hdr_on),
-              onPressed: () => _handleSubmitted(recipientName, loremIpsum))
         ],
       ),
       body: new Column(
