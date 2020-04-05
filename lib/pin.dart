@@ -110,7 +110,7 @@ class PinWidgetState extends State<PinWidget> {
 
               ]
             ),
-            Container(padding: const EdgeInsets.fromLTRB(40, 130, 40, 30),child:pinField(),),
+            Container(padding: const EdgeInsets.fromLTRB(40, 110, 40, 30),child:pinField(),),
             Divider(),
             my_keyboard(),
           ],
