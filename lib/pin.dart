@@ -4,7 +4,7 @@ class PinWidget extends StatefulWidget {
   PinWidget({
     @required this.correct_pin,
     @required this.proceed_to,
-  }) : assert(correct_pin.length == 4);
+  }) : assert(correct_pin.length == 6);
   @override
   PinWidgetState createState() => PinWidgetState();
   final String correct_pin;
@@ -31,7 +31,7 @@ class PinWidgetState extends State<PinWidget> {
             if (_pin == widget.correct_pin){
               _pushSaved();
             }
-            else if (_pin.length>3){
+            else if (_pin.length>6){
               _pin = '';
             }
           });
@@ -47,6 +47,8 @@ class PinWidgetState extends State<PinWidget> {
         Icon(_pin.length>1? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>1? Colors.blue : Colors.black12),
         Icon(_pin.length>2? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>2? Colors.blue : Colors.black12),
         Icon(_pin.length>3? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>3? Colors.blue : Colors.black12),
+        Icon(_pin.length>3? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>4? Colors.blue : Colors.black12),
+        Icon(_pin.length>3? Icons.brightness_1 : Icons.brightness_1, color: _pin.length>5? Colors.blue : Colors.black12),
 
       ],
     );

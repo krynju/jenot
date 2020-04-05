@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
         accentColor: Colors.lightBlue[50]
       ),
       home: PinWidget(
-        correct_pin: '6969',
+        correct_pin: '696969',
         proceed_to: MyHomePage(title: 'Flutter Demo Home Page'),
       )
     );
