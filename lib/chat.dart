@@ -177,7 +177,12 @@ class ChatScreenState extends State<ChatScreen> with TickerProviderStateMixin {
       });
 
       Timer(Duration(seconds: 4), () {
-        _handleSubmitted(recipientName, "Widziałeś już nowy projekt ustawy?");
+        _handleSubmitted(
+            recipientName, "Widziałeś już zmiany w nowym projekcie ustawy?");
+      });
+      Timer(Duration(seconds: 5), () {
+        _handleSubmitted(recipientName,
+            "Zdecydowanie nie zgadzam się z nowym formatem. Musimy znacznie go zmienić zanim upublicznimy te informacje.");
       });
     }
   }

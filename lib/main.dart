@@ -42,9 +42,12 @@ class _MyHomePageState extends State<MyHomePage> {
       appBar: AppBar(
         title: Text(mainUserName, textAlign: TextAlign.center,),
         actions: <Widget>[
-          new Image(image: AssetImage(partiesAssets[partyIndex]),
-              fit: BoxFit.fitWidth,
-              width: 40),
+          Padding(
+            padding: const EdgeInsets.only(right: 10.0),
+            child: new Image(image: AssetImage(partiesAssets[partyIndex]),
+                fit: BoxFit.fitWidth,
+                width: 40),
+          ),
         ],
       ),
       body: Center(
@@ -70,7 +73,10 @@ class _MyHomePageState extends State<MyHomePage> {
                             ),
                           )
                       ),
-                      Expanded(flex: 1, child: Text('Witaj w aplikacji Jenot')),
+                      Expanded(flex: 1, child: Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text('Witaj w aplikacji Jenot'),
+                      )),
                     ],
                   )),
             ),
@@ -87,6 +93,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: InkWell(
         onTap: open(),
         child: Card(
+
           semanticContainer: true,
           clipBehavior: Clip.antiAliasWithSaveLayer,
           child: Stack(
@@ -97,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         image: AssetImage(imagePath), fit: BoxFit.cover)),
               ),
               Container(
-                  padding: EdgeInsets.all(10),
+                  padding: EdgeInsets.all(5),
                   alignment: Alignment.bottomLeft,
                   child: Text(
                     title,
@@ -107,10 +114,10 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+//            borderRadius: BorderRadius.circular(10.0),
           ),
           elevation: 5,
-          margin: EdgeInsets.all(10),
+//          margin: EdgeInsets.all(10),
         ),
       ),
     );
